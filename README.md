@@ -61,5 +61,4 @@ Result: User2 owes 370, User3 owes 880.
 Input: `User4 1200 4 User1 User2 User3 User4 PERCENT 40 20 20 20`
 Result: User1 owes 480, User2 owes 240, User3 owes 240.
 
----
-Developed by Antigravity AI
+
