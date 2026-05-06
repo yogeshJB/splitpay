@@ -1,0 +1,67 @@
+.user-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.history-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.history-tabs button {
+  background: none;
+  color: var(--text-secondary);
+  padding: 0.75rem 1.5rem;
+  border-bottom: 2px solid transparent;
+}
+
+.history-tabs button.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.history-item .desc {
+  flex: 1;
+  font-weight: 500;
+}
+
+.history-item .amount {
+  width: 100px;
+  text-align: right;
+  font-weight: 600;
+}
+
+.history-item .date {
+  width: 100px;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.status {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.status.owes-you { color: var(--accent-green); }
+.status.you-owe { color: var(--accent-red); }
+
+@media (max-width: 900px) {
+  .details-grid {
+    grid-template-columns: 1fr;
+  }
+}

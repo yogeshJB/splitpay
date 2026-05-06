@@ -1,0 +1,61 @@
+<div class="container animate-fade-in" *ngIf="details$ | async as details">
+  <header class="user-header">
+    <button class="btn-secondary" routerLink="/">← Back</button>
+    <div class="user-main-info">
+      <h1>{{ details.user.name }}</h1>
+      <p class="text-secondary">{{ details.user.email }} • {{ details.user.mobile }}</p>
+    </div>
+  </header>
+
+  <div class="details-grid margin-top-2">
+    <div class="balances-section">
+      <div class="glass card">
+        <h3>Individual Balances</h3>
+        <div class="balance-list margin-top-1">
+          <div *ngFor="let bal of details.balances" class="balance-item">
+            <span>{{ bal.userName }}</span>
+            <span class="status" [class.owes-you]="bal.amount > 0" [class.you-owe]="bal.amount < 0">
+              {{ bal.amount > 0 ? 'owes you' : 'you owe' }}
+            </span>
+            <span class="amount" [class.positive]="bal.amount > 0" [class.negative]="bal.amount < 0">
+              Rs. {{ Math.abs(bal.amount) }}
+            </span>
+          </div>
+          <div *ngIf="details.balances.length === 0" class="text-secondary">
+            No active balances with anyone.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="history-section">
+      <div class="glass card">
+        <h3>Payment History</h3>
+        <div class="history-tabs margin-top-1">
+          <button (click)="activeTab = 'paid'" [class.active]="activeTab === 'paid'">Paid By You</button>
+          <button (click)="activeTab = 'shared'" [class.active]="activeTab === 'shared'">Your Shares</button>
+        </div>
+
+        <div class="tab-content margin-top-1">
+          <div *ngIf="activeTab === 'paid'">
+            <div *ngFor="let exp of details.paidExpenses" class="history-item">
+              <span class="desc">{{ exp.description }}</span>
+              <span class="amount">Rs. {{ exp.amount }}</span>
+              <span class="date text-secondary">{{ exp.createdAt | date:'shortDate' }}</span>
+            </div>
+            <div *ngIf="details.paidExpenses.length === 0" class="text-secondary">No payments made.</div>
+          </div>
+
+          <div *ngIf="activeTab === 'shared'">
+            <div *ngFor="let share of details.sharedExpenses" class="history-item">
+              <span class="desc">{{ share.expense?.description }}</span>
+              <span class="amount">Rs. {{ share.shareAmount }}</span>
+              <span class="date text-secondary">{{ share.expense?.createdAt | date:'shortDate' }}</span>
+            </div>
+            <div *ngIf="details.sharedExpenses.length === 0" class="text-secondary">No shared expenses.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

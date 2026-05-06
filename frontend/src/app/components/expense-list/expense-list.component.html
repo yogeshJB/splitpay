@@ -1,0 +1,27 @@
+<div class="glass card">
+  <h3 class="margin-bottom-1">Recent Expenses</h3>
+  
+  <div *ngIf="loading$ | async" class="text-secondary">Loading expenses...</div>
+
+  <div class="expense-items">
+    <div *ngFor="let expense of expenses$ | async" class="expense-item animate-fade-in">
+      <div class="expense-icon glass">
+        <span>{{ expense.description.charAt(0).toUpperCase() }}</span>
+      </div>
+      <div class="expense-info">
+        <span class="expense-desc">{{ expense.description }}</span>
+        <span class="expense-meta text-secondary">
+          Paid by <strong>{{ expense.payer?.name }}</strong> • {{ expense.createdAt | date:'shortDate' }}
+        </span>
+      </div>
+      <div class="expense-amount">
+        <span class="amount">Rs. {{ expense.amount }}</span>
+        <span class="split-type text-secondary">{{ expense.splitType }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="(expenses$ | async)?.length === 0 && !(loading$ | async)" class="text-secondary">
+    No expenses added yet.
+  </div>
+</div>

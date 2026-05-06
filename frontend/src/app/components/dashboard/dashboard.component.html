@@ -1,0 +1,29 @@
+<div class="container animate-fade-in">
+  <header class="dashboard-header">
+    <div class="brand">
+      <h1>SplitPay</h1>
+      <p class="text-secondary">Premium Expense Sharing</p>
+    </div>
+    <div class="actions">
+      <button class="btn-primary" (click)="showUserForm = true">Add Friend</button>
+      <button class="btn-primary" routerLink="/add-expense" style="margin-left: 1rem;">Add Expense</button>
+    </div>
+  </header>
+
+  <div class="dashboard-grid">
+    <aside class="sidebar">
+      <app-user-list></app-user-list>
+    </aside>
+    
+    <main class="content">
+      <app-balance-summary></app-balance-summary>
+      <app-expense-list></app-expense-list>
+    </main>
+  </div>
+</div>
+
+<div class="modal-overlay" *ngIf="showUserForm" (click)="showUserForm = false">
+  <div class="modal-content glass" (click)="$event.stopPropagation()">
+    <app-user-form (close)="showUserForm = false"></app-user-form>
+  </div>
+</div>

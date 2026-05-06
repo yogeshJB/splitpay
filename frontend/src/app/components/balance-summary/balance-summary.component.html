@@ -1,0 +1,18 @@
+<div class="glass card margin-bottom-2">
+  <h3 class="margin-bottom-1">Net Balances</h3>
+  
+  <div *ngIf="loading$ | async" class="text-secondary">Loading balances...</div>
+
+  <div class="balance-list">
+    <div *ngFor="let balance of balances$ | async" class="balance-item animate-fade-in">
+      <span class="sharer">{{ balance.sharer }}</span>
+      <span class="text-secondary">owes</span>
+      <span class="payer">{{ balance.payer }}</span>
+      <span class="amount" [class.positive]="balance.amount > 0">Rs. {{ balance.amount }}</span>
+    </div>
+  </div>
+
+  <div *ngIf="(balances$ | async)?.length === 0 && !(loading$ | async)" class="text-secondary">
+    Everything is settled! No outstanding balances.
+  </div>
+</div>
